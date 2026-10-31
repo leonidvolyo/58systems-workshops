@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow"><!-- УБРАТЬ после одобрения публичного запуска -->
 <meta name="description" content="Бесплатный пилотный воркшоп: за один вечер сделайте своё мини-приложение с помощью AI — без кода.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Свой мини-сервис с AI за вечер — бесплатный пилот">
+<meta property="og:description" content="Две онлайн-встречи на русском. Вы уходите со своей рабочей ссылкой. Без кода.">
+<meta property="og:locale" content="ru_RU">
 <title>Свой мини-сервис с AI за вечер · 58 Systems Workshops</title>
 <link rel="stylesheet" href="styles.css">
 <script defer src="config.js"></script>
@@ -73,6 +77,12 @@
   <form id="signup-form" class="form" hidden novalidate>
     <label>Имя или ник<input name="name" required maxlength="80" autocomplete="given-name"></label>
     <label>E-mail<input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+    <label>Telegram или Instagram (по желанию, чтобы написать быстрее)<input name="contact" maxlength="80" placeholder="@username"></label>
+    <fieldset class="slots"><legend>Когда вам удобно? (можно несколько, поможет выбрать даты)</legend>
+      <label class="check"><input type="checkbox" name="slots" value="weekday-evening"> Будни, вечер</label>
+      <label class="check"><input type="checkbox" name="slots" value="weekend-day"> Выходные, день</label>
+      <label class="check"><input type="checkbox" name="slots" value="weekend-evening"> Выходные, вечер</label>
+    </fieldset>
     <label>Какой трек интереснее?
       <select name="track"><option value="A">A · Калькулятор цены</option><option value="B">B · Квиз</option><option value="C">C · Личный планер</option><option value="?">Пока не знаю</option></select></label>
     <label>Для кого или для чего хотите сделать приложение? (одно предложение, по желанию)<input name="idea" maxlength="200"></label>
