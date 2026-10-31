@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Сколько можно тратить в день — учебный пример</title><link rel="stylesheet" href="../shared.css"><script defer src="budget-core.js"></script><script defer src="budget.js"></script></head>
+<body><div class="wrap">
+<p class="tag">ТРЕК C · УЧЕБНЫЙ ЭТАЛОН · ВЫМЫШЛЕННЫЕ ДАННЫЕ</p>
+<h1>Сколько можно тратить в день?</h1>
+<p>Введите вымышленные числа: приложение покажет, сколько свободных денег остаётся на день после обязательных трат и накоплений.</p>
+<form id="f" class="card" novalidate>
+<label for="income">Доход за месяц (Kč)</label><input id="income" type="number" step="any" inputmode="decimal" value="50000">
+<label for="fixed">Обязательные траты: аренда, связь и т.д. (Kč)</label><input id="fixed" type="number" step="any" inputmode="decimal" value="30000">
+<label for="pct">Откладывать, % от дохода</label><input id="pct" type="number" step="any" inputmode="decimal" value="10">
+<label for="days">Дней до конца месяца</label><input id="days" type="number" step="1" inputmode="numeric" value="30">
+<p id="error" class="error" role="alert" hidden></p>
+</form>
+<div id="result" class="card result" aria-live="polite"></div>
+<p class="note">Учебный пример, не финансовый совет. Работает в браузере, ничего не отправляет и не сохраняет.</p>
+</div></body></html>
