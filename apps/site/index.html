@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#09090b"><title>Анна · фотограф — учебный пример мини-сайта</title>
+<link rel="stylesheet" href="../shared.css?v=6">
+<style>
+html{scroll-behavior:smooth}body{overflow-x:clip}
+.top{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));background:linear-gradient(#09090bcc,#09090b00);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.top b{font-size:14px;letter-spacing:-.01em}.top a{font-size:13px;font-weight:600;color:var(--ink);background:var(--acc);padding:8px 14px;border-radius:99px;text-decoration:none}
+.prog{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--acc);transform-origin:0 50%;transform:scaleX(0);z-index:30}
+section{max-width:760px;margin:auto;padding:84px 20px 40px}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.orb{position:absolute;right:-30%;top:12%;width:90%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 35%,#d7ff3f55,#d7ff3f10 45%,transparent 68%);filter:blur(8px);animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-8%,6%) scale(1.08)}}
+.hero h1{font-size:clamp(64px,22vw,150px);line-height:.88;letter-spacing:-.06em;margin:14px 0 14px;position:relative}
+.hero h1 span{display:block;overflow:hidden}.hero h1 i{display:inline-block;font-style:normal;transform:translateY(105%);animation:up .9s cubic-bezier(.22,1,.36,1) .1s forwards}.hero h1 span:nth-child(2) i{animation-delay:.22s;color:var(--mute)}
+@keyframes up{to{transform:none}}.hero p{max-width:380px;position:relative}
+.cue{margin-top:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;border-top:1px solid var(--line);padding-top:26px}.stats b{display:block;font-size:clamp(34px,10vw,56px);letter-spacing:-.04em;line-height:1;font-weight:800}.stats span{font-size:13px;color:var(--mute)}
+h2{font-size:clamp(26px,7vw,40px);letter-spacing:-.03em;line-height:1.05;margin:0 0 20px}
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;margin:0 -20px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
+.shot{flex:0 0 min(62vw,260px);aspect-ratio:3/4;border-radius:18px;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:14px;font-weight:600;font-size:14px;border:1px solid var(--line)}
+.shot::after{content:"";position:absolute;inset:0;opacity:.22;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.shot span{position:relative;z-index:1;background:#09090b99;padding:5px 10px;border-radius:99px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.g1{background:radial-gradient(120% 80% at 30% 20%,#f2c58d,#6b3d2a 55%,#1a1210)}.g2{background:radial-gradient(120% 80% at 70% 15%,#9fc4d6,#2d4a5e 55%,#0d141a)}
+.g3{background:radial-gradient(120% 80% at 40% 25%,#d7ff3f66,#31401a 55%,#0f130a)}.g4{background:radial-gradient(120% 80% at 60% 20%,#c9b8e6,#473a63 55%,#120f1a)}.g5{background:radial-gradient(120% 80% at 30% 25%,#e8e4da,#5a5750 55%,#151514)}
+.svc{border-top:1px solid var(--line)}.svc div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);transition:padding .3s}.svc div:hover{padding-left:8px}
+.svc b{font-size:clamp(20px,5.5vw,28px);letter-spacing:-.02em;font-weight:700}.svc small{display:block;color:var(--mute);font-size:13px;font-weight:400}.svc em{font-style:normal;color:var(--acc);font-weight:700;white-space:nowrap}
+.cta{display:inline-block;margin-top:8px;background:var(--acc);color:var(--ink);font-weight:700;padding:15px 24px;border-radius:14px;text-decoration:none}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}.rv.in{opacity:1;transform:none}
+.foot{padding:30px 20px calc(30px + env(safe-area-inset-bottom));text-align:center;font-size:12px;color:#8b8b95}
+/* inside the phone frame on the landing page: keep clear of the camera island */
+.framed .top{padding-top:38px}.framed .hero{padding-top:110px}
+@media(prefers-reduced-motion:reduce){.hero h1 i{transform:none;animation:none}.orb{animation:none}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style><script>if(self!==top)document.documentElement.classList.add('framed')</script></head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="top"><b>Анна</b><a href="#hire">Написать</a></div>
+<section class="hero"><div class="orb" aria-hidden="true"></div>
+  <p class="tag">Учебный эталон · вымышленный персонаж</p>
+  <h1><span><i>Анна.</i></span><span><i>Свет и люди.</i></span></h1>
+  <p>Фотограф. Портреты, семьи и небольшие события. Работаю спокойно и без суеты.</p>
+  <div class="cue">Листайте ↓</div>
+</section>
+<section class="rv"><div class="stats"><div><b data-to="8">0</b><span>лет снимаю</span></div><div><b data-to="240">0</b><span>съёмок</span></div><div><b data-to="3">0</b><span>пакета услуг</span></div></div></section>
+<section><h2 class="rv">Работы</h2><div class="rail rv"><div class="shot g1"><span>Портрет</span></div><div class="shot g2"><span>Семья</span></div><div class="shot g3"><span>Событие</span></div><div class="shot g4"><span>Студия</span></div><div class="shot g5"><span>Город</span></div></div></section>
+<section><h2 class="rv">Услуги</h2><div class="svc rv"><div><span><b>Мини</b><small>30 минут · 10 фото</small></span><em>от 60 €</em></div><div><span><b>Стандарт</b><small>1,5 часа · 30 фото</small></span><em>от 150 €</em></div><div><span><b>Большая съёмка</b><small>4 часа · 80 фото · 2 локации</small></span><em>от 380 €</em></div></div></section>
+<section id="hire"><h2 class="rv">Давайте снимать</h2><p class="rv">Напишите, что хотите получить, — подберём формат и время.</p><a class="cta rv" href="#hire" onclick="return false">Написать Анне (пример)</a></section>
+<div class="foot">Вымышленный персонаж и данные. Учебный пример мини-сайта: без сервера, форм и сбора данных.</div>
+<script>
+(function(){
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,bar=document.getElementById('prog'),t=false;
+  function upd(){t=false;var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';}
+  addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(upd);}},{passive:true});upd();
+  function count(el){var to=+el.dataset.to;if(reduce){el.textContent=to;return;}var t0=performance.now();(function f(n){var k=Math.min(1,(n-t0)/1200);el.textContent=Math.round(to*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f);})(t0);}
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window&&!reduce){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-to]').forEach(count);io.unobserve(e.target);}});},{threshold:.2});els.forEach(function(s){io.observe(s);});}
+  else{els.forEach(function(s){s.classList.add('in');s.querySelectorAll('[data-to]').forEach(function(e){e.textContent=e.dataset.to;});});}
+})();
+</script></body></html>

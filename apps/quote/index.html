@@ -1,9 +1,29 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#f3f7f4"><title>QuoteKit Lite — Interactive Reference Demo</title><link rel="stylesheet" href="demo.css"><script defer src="quote-core.js"></script><script defer src="demo.js"></script></head><body>
-<header><div class="wrap head"><a href="../../index.html" class="brand">58 <span>Systems Workshops</span></a><span class="tag">LEARNING PROJECT · NOT AN INVOICE</span></div></header>
-<main class="wrap"><div class="hero"><div><p class="eyebrow">REFERENCE APP FOR THE FOUNDING BETA</p><h1>QuoteKit Lite</h1><p>Calculate an illustrative price estimate for your service. Change the numbers, test the arithmetic, and see how a small AI-generated business tool should behave.</p></div><div class="safe">✓ Local-only demo<br><span>No login · No customer records · No server storage</span></div></div>
-<div class="layout"><form id="estimate-form" novalidate><div class="form-title"><h2>Build an estimate</h2><p>Use fictional inputs only.</p></div><label for="preset">Example profession</label><select id="preset" name="preset"><option>Photographer</option><option>Tutor</option><option>Cleaner</option></select><div class="field-grid"><div><label for="hours">Hours</label><input id="hours" name="hours" inputmode="decimal" type="number" step="any" min="0" max="10000" value="2" required></div><div><label for="rate">Hourly rate (€)</label><input id="rate" name="rate" inputmode="decimal" type="number" step="any" min="0" max="100000" value="60" required></div><div><label for="extras">Extra costs (€)</label><input id="extras" name="extras" inputmode="decimal" type="number" step="any" min="0" max="1000000" value="20" required></div><div><label for="travel">Travel fee (€)</label><input id="travel" name="travel" inputmode="decimal" type="number" step="any" min="0" max="1000000" value="0" required></div></div><label for="discount">Fixed discount (€)</label><input id="discount" name="discount" inputmode="decimal" type="number" step="any" min="0" max="1000000" value="0" required><label for="note">Optional fictional project note</label><textarea id="note" maxlength="220" rows="2" placeholder="e.g. Two-hour example photo session (fictional)"></textarea><p id="error" class="error" role="alert" aria-live="polite" hidden></p><div class="actions"><button type="button" id="reset" class="secondary">Reset example</button><button type="button" id="copy" class="primary">Copy sample estimate</button></div><p id="feedback" class="feedback" role="status" aria-live="polite"></p></form>
-<aside class="results"><div class="kicker">LIVE PREVIEW</div><h2>Your estimate</h2><div class="row"><span>Labour</span><strong id="labor">€120.00</strong></div><div class="row"><span>Extras + travel</span><strong id="additions">€20.00</strong></div><div class="row"><span>Subtotal</span><strong id="subtotal">€140.00</strong></div><div class="row"><span>Discount</span><strong id="discount-result">−€0.00</strong></div><div class="total"><span>Estimated total</span><strong id="total">€140.00</strong></div><p class="disclaimer">Illustrative estimate only, not an invoice, tax calculation, offer or price guarantee.</p><button type="button" id="print" class="print">Print this demo</button></aside></div>
-<section class="learning"><h2>Try these three checks</h2><div class="tests"><article><strong>1. Photographer</strong><p>2 hours × €60 + €20 costs → €140</p></article><article><strong>2. Tutor</strong><p>3 hours × €35 → €105</p></article><article><strong>3. Invalid input</strong><p>Enter a negative rate or discount above subtotal. You should see a clear error.</p></article></div><p class="privacy-note"><strong>Privacy:</strong> This example runs calculations inside your browser. It does not send form data to a server or store it. A published AI-created version may have different behavior; verify it separately before use.</p></section>
-</main><footer><div class="wrap">© 58 Systems Workshops · Educational demonstration · <a href="../../index.html">Workshop overview</a></div></footer>
-</body></html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#09090b"><title>Умный расчёт цены — учебный пример</title><link rel="stylesheet" href="../shared.css?v=6"><link rel="stylesheet" href="quote.css?v=5"><script defer src="quote-pro-core.js"></script><script defer src="quote.js"></script><script>if(self!==top)document.documentElement.classList.add('framed')</script></head>
+<body><div class="wrap">
+<p class="tag">ТРЕК A · УЧЕБНЫЙ ЭТАЛОН · ВЫМЫШЛЕННЫЕ ДАННЫЕ</p>
+<h1>Расчёт стоимости съёмки</h1>
+<p>Выберите пакет, поменяйте числа — итог обновится сразу.</p>
+<form id="f" class="card" novalidate>
+  <div class="pkgs" role="radiogroup" aria-label="Пакет">
+    <label class="pkg"><input type="radio" name="pkg" value="basic" checked><span>Базовый</span></label>
+    <label class="pkg"><input type="radio" name="pkg" value="standard"><span>Стандарт <small>×1,25</small></span></label>
+    <label class="pkg"><input type="radio" name="pkg" value="premium"><span>Премиум <small>×1,6</small></span></label>
+  </div>
+  <div class="two"><div><label for="hours">Часы</label><input id="hours" type="number" step="any" inputmode="decimal" value="2"></div>
+  <div><label for="rate">Ставка в час (€)</label><input id="rate" type="number" step="any" inputmode="decimal" value="60"></div>
+  <div><label for="extras">Доп. расходы (€)</label><input id="extras" type="number" step="any" inputmode="decimal" value="20"></div>
+  <div><label for="travel">Выезд (€)</label><input id="travel" type="number" step="any" inputmode="decimal" value="0"></div></div>
+  <label for="discount">Скидка, фиксированная сумма (€)</label><input id="discount" type="number" step="any" inputmode="decimal" value="0">
+  <p id="error" class="error" role="alert" hidden></p>
+</form>
+<div id="result" class="card result" aria-live="polite">
+  <div class="row"><span>Работа</span><b id="labor"></b></div>
+  <div class="row"><span>Расходы и выезд</span><b id="adds"></b></div>
+  <div class="row"><span>Скидка</span><b id="disc"></b></div>
+  <p class="tag l">ИТОГО · <span id="pkgname"></span></p><div class="big" id="total">0</div>
+  <div class="btns"><button type="button" id="copy">Скопировать для клиента</button><button type="button" id="print" class="alt">Печать / PDF</button></div>
+  <p id="msg" class="note l" role="status"></p>
+</div>
+<p class="note">Учебный пример, не является счётом, офертой или налоговым расчётом. Работает в браузере, ничего не отправляет и не сохраняет.</p>
+</div></body></html>

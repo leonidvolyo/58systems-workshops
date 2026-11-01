@@ -1,0 +1,1 @@
+Font: Inter Tight, SIL Open Font License 1.1 (fonts.google.com). Self-hosted subsets (latin + cyrillic).

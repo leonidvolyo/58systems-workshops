@@ -2,99 +2,300 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow"><!-- УБРАТЬ после одобрения публичного запуска -->
-<meta name="description" content="Бесплатный пилотный воркшоп: за один вечер сделайте своё мини-приложение с помощью AI — без кода.">
+<meta name="theme-color" content="#09090b">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Бесплатный пилотный воркшоп: за один вечер сделайте свой сайт-визитку с ценами, расчётом и записью — с помощью AI, без кода.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Свой мини-сервис с AI за вечер — бесплатный пилот">
+<meta property="og:title" content="Свой сайт за один вечер — бесплатный пилот">
 <meta property="og:description" content="Две онлайн-встречи на русском. Вы уходите со своей рабочей ссылкой. Без кода.">
 <meta property="og:locale" content="ru_RU">
-<title>Свой мини-сервис с AI за вечер · 58 Systems Workshops</title>
+<title>Свой сайт за один вечер с AI · 58 Systems Workshops</title>
+<link rel="preload" href="fonts/inter-tight-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('fx-seen')){d.classList.add('loading');setTimeout(function(){d.classList.remove('loading');},4200);}}catch(e){}})();</script>
+<script defer src="vendor/gsap.min.js"></script>
+<script defer src="vendor/ScrollTrigger.min.js"></script>
+<script defer src="vendor/lenis.min.js"></script>
 <script defer src="config.js"></script>
 <script defer src="site.js"></script>
+<script defer src="gl.js"></script>
+<script defer src="fx.js"></script>
 </head>
 <body>
+<div id="loader" aria-hidden="true"><div class="ld-in"><span class="ld-n"><b id="lc">0</b><i>%</i></span><span class="ld-t">58 Workshops</span></div></div>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip" href="#signup">К форме записи</a>
 <div id="preview" class="preview" role="status">ПРЕДПРОСМОТР — запись ещё не открыта.</div>
-<header class="wrap bar"><b>58 Systems <em>Workshops</em></b><a href="#tracks">Что строим</a></header>
-<main>
-<section class="wrap hero">
-  <p class="eyebrow">БЕСПЛАТНЫЙ ПИЛОТ · 6–8 МЕСТ · НА РУССКОМ</p>
-  <h1>Сделайте своё приложение с AI за один вечер. Без кода.</h1>
-  <p class="lead">Две живые встречи: на первой вы собираете и публикуете свой мини-инструмент — калькулятор цены, квиз или личный планер. На второй проверяем, чиним и показываем. Вы уходите со ссылкой, которую можно отправить клиенту или другу.</p>
-  <p><a id="cta" class="btn disabled" aria-disabled="true">Запись скоро откроется</a></p>
-  <p class="micro">Нужны ноутбук, браузер и интернет. Опыт программирования не нужен. Это пилот: взамен мы просим честную обратную связь.</p>
-</section>
 
-<section class="wrap" id="tracks">
-  <h2>Выберите свой трек</h2>
-  <div class="grid">
-    <article><h3>A · Калькулятор цены</h3><p>Для мастеров, репетиторов, фрилансеров: часы, ставка, расходы — и клиенту уходит чёткая цена.</p><a href="apps/quote/index.html">Посмотреть пример ↗</a></article>
-    <article><h3>B · Квиз «что мне подходит»</h3><p>3 вопроса — и клиент видит свой пакет услуг. Подходит коучам, мастерам, небольшим магазинам.</p><a href="apps/quiz/index.html">Посмотреть пример ↗</a></article>
-    <article><h3>C · Личный планер</h3><p>Для себя: «сколько можно тратить в день», план поездки или недели тренировок.</p><a href="apps/budget/index.html">Посмотреть пример ↗</a></article>
+<header class="hdr" id="hdr">
+  <a class="brand" href="#top" aria-label="58 Workshops — наверх"><i>58</i><span>Workshops</span></a>
+  <nav class="nav" aria-label="Разделы"><a href="#story">Как это работает</a><a href="#get">Что вы получите</a><a href="#examples">Примеры</a><a href="#about">Ведущий</a><a href="#faq">Вопросы</a></nav>
+  <a class="btn sm" data-cta href="#signup">Список ожидания</a>
+  <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
+</header>
+<nav class="menu" id="menu" aria-label="Меню" hidden>
+  <a href="#story"><span>01</span>Как это работает</a><a href="#get"><span>02</span>Что вы получите</a><a href="#examples"><span>03</span>Примеры</a><a href="#about"><span>04</span>Ведущий</a><a href="#faq"><span>05</span>Вопросы</a><a class="mcta" href="#signup">Встать в список ожидания →</a>
+</nav>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" id="hero">
+  <canvas class="gl" id="glHero" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-in">
+    <p class="eyebrow"><span class="dot"></span>Бесплатный пилот · онлайн · на русском</p>
+    <h1 class="display" aria-label="Свой сайт за один вечер">
+      <span class="ln"><span>Свой сайт</span></span>
+      <span class="ln"><span>за один</span></span>
+      <span class="ln o"><span>вечер<b>.</b></span></span>
+    </h1>
+    <div class="hero-bot">
+      <div class="hero-l">
+        <p class="prompt" aria-hidden="true"><b>&rsaquo;</b><span id="ptype">Сделай сайт-визитку фотографа: услуги, цены и запись в WhatsApp</span><i class="caret"></i></p>
+        <p class="lead">Вы рассказываете, чем занимаетесь, — AI собирает сайт, а мы вместе проверяем, что цены и расчёты точные. К концу вечера у вас ссылка, которую можно поставить в профиль и отправить клиенту. Без кода.</p>
+        <div class="actions"><a class="btn primary" data-cta id="cta" aria-disabled="true">Запись скоро откроется</a><a class="btn ghost" href="#story">Как это работает</a></div>
+      </div>
+      <ul class="facts"><li><b>0 €</b><span>пилот бесплатный</span></li><li><b>2</b><span>онлайн-встречи</span></li><li><b>6–8</b><span>мест в группе</span></li></ul>
+    </div>
   </div>
-  <p class="micro">Все примеры работают прямо в браузере и используют вымышленные данные. Пример A — на английском, на встрече будет русская версия.</p>
+  <a class="cue" href="#story" aria-label="Листайте вниз"><span>Листайте</span><i></i></a>
 </section>
 
-<section class="wrap alt">
-  <h2>Как это устроено</h2>
-  <ol class="steps">
-    <li><b>Встреча 1 · 90 минут.</b> Пишем «пять строк» о вашем инструменте, собираем его с AI, проверяем тестами, публикуем ссылку.</li>
-    <li><b>Между встречами.</b> Отправьте ссылку другу и спросите, что ему непонятно.</li>
-    <li><b>Встреча 2 · 60 минут</b> (через несколько дней). Ломаем и чиним, добавляем одну функцию, показываем результат.</li>
-  </ol>
-  <p id="dates" class="meta">Даты будут объявлены после открытия записи.</p>
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true"><div class="mq"><span>Фотографы</span><span>Стилисты</span><span>Nail-мастера</span><span>Брови и ресницы</span><span>Репетиторы</span><span>Коучи</span><span>Визажисты</span><span>Консультанты</span><span>Фотографы</span><span>Стилисты</span><span>Nail-мастера</span><span>Брови и ресницы</span><span>Репетиторы</span><span>Коучи</span><span>Визажисты</span><span>Консультанты</span></div></div>
+
+<!-- STATEMENT -->
+<section class="statement"><div class="container narrow"><p class="stmt" id="stmt">«Сколько стоит? А что входит? Когда есть окошко?» — вы отвечаете на это каждый день. Красивый сайт отвечает за вас: показывает услуги, считает цену и присылает готовый запрос. Мы научим вас сделать такой самим — и проверить, что он не ошибается.</p></div></section>
+
+<!-- PINNED STORY -->
+<section class="story" id="story">
+  <div class="sticky">
+    <div class="container story-grid">
+      <div class="story-list">
+        <p class="eyebrow">Как это работает</p>
+        <h2>От слов — до ссылки</h2>
+        <ol class="steps" id="steps">
+          <li class="on"><span class="n">01</span><div><h3>Говорите по-человечески</h3><p><span>Пять строк: кто вы, какие услуги, сколько стоят. Без терминов.</span></p></div></li>
+          <li><span class="n">02</span><div><h3>Видите сайт сразу</h3><p><span>Через минуту — живая страница. Меняете цвета, тексты, тему — и сразу видите.</span></p></div></li>
+          <li><span class="n">03</span><div><h3>Проверяете, а не верите</h3><p><span>AI иногда уверенно ошибается. Три простых теста ловят это за полминуты: цены, пустые поля, телефон.</span></p></div></li>
+          <li><span class="n">04</span><div><h3>Публикуете и показываете</h3><p><span>Ссылка для профиля и карточка для Stories. Отправьте клиенту — и слушайте «вау».</span></p></div></li>
+        </ol>
+      </div>
+      <div class="story-stage">
+        <div class="ph pin-ph" id="pinPhone" style="--w:var(--pin-w)">
+          <div class="ph-3d">
+            <div class="ph-face front"><div class="ph-screen" id="pscreen" data-active="0">
+              <div class="scene s0"><p class="lbl">Ваш запрос</p><div class="bubble"><span class="typing">Сделай сайт-визитку фотографа: услуги с ценами, галерея работ, расчёт стоимости и кнопка записи в WhatsApp. Тема — тёмная.</span></div></div>
+              <div class="scene s1"><div class="mini"><p class="mt">Услуги и цены</p><div class="r"><span>Мини</span><b>60 €</b></div><div class="r"><span>Стандарт</span><b>150 €</b></div><div class="tot"><span>Итого</span><b id="s2-sum" data-to="210" data-cur=" €">0</b></div></div></div>
+              <div class="scene s2"><p class="lbl">Проверка</p><ul class="tests"><li><span>2 × Стандарт</span><em>300 €</em><svg class="ic" viewBox="0 0 16 16" aria-label="верно"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li><span>+ срочно 20 %</span><em>360 €</em><svg class="ic" viewBox="0 0 16 16" aria-label="верно"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li><li><span>Ничего не выбрано</span><em>ошибка</em><svg class="ic" viewBox="0 0 16 16" aria-label="исправлено"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li></ul><p class="foot-note">Нашли и исправили за 30 секунд</p></div>
+              <div class="scene s3"><div class="url"><span>anna-novak.site</span><svg class="ic" viewBox="0 0 16 16" aria-label="работает"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="share">Поделиться в Stories</div></div>
+            </div><i class="ph-island"></i></div>
+            <div class="ph-face back"><b>58</b></div><div class="ph-edge l"></div><div class="ph-edge r"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>Почему бесплатно?</h2>
-  <p>Это первая тестовая группа. Я инженер-разработчик и проверяю, насколько понятно и полезно такое обучение для людей без кода. Мне нужны ваши честные впечатления — в том числе критические. Отзывы публично я использую только с вашего отдельного согласия.</p>
-  <h2>Чего здесь нет</h2>
-  <ul>
-    <li>Это учебный прототип на вымышленных данных, а не готовая бизнес-система или бухгалтерский расчёт.</li>
-    <li>Бесплатные тарифы сторонних AI-сервисов имеют лимиты; мы заранее проверяем путь, но условия сервисов могут меняться.</li>
-    <li>Встречи не записываются. Личные данные клиентов в приложения вводить не нужно и нельзя.</li>
-  </ul>
+<!-- SHOWCASE: browser frame zooms in, scrolls inside, zooms out -->
+<section class="zoom" id="zoom" aria-label="Пример результата">
+  <div class="zsticky">
+    <div class="zcopy" id="zcopy">
+      <p class="eyebrow">Результат</p>
+      <h2>Вот что вы соберёте</h2>
+      <p>Это не картинка, а живой сайт: 3D-кольцо ваших работ, закреплённые сцены, расчёт цены и квиз. Таким он будет у вас — со своими текстами и фото.</p>
+    </div>
+    <div class="zphone" id="zPhone">
+      <div class="bf zbf" id="zBf"><div class="bf-bar"><i></i><i></i><i></i><span>anna-novak.site</span></div><div class="bf-view"><iframe id="zFrame" data-src="apps/examples/photo.html?v=10" title="Пример сайта: фотограф" tabindex="-1"></iframe></div></div>
+      <div class="ph zph" id="zPh" style="--w:var(--z-w)">
+        <div class="ph-3d">
+          <div class="ph-face front"><div class="ph-screen"><iframe id="zFramePh" data-src="apps/examples/photo.html?v=10" title="Пример сайта: фотограф" tabindex="-1"></iframe></div><i class="ph-island"></i></div>
+          <div class="ph-face back"><b>58</b></div><div class="ph-edge l"></div><div class="ph-edge r"></div>
+        </div>
+      </div>
+    </div>
+    <ol class="cobar" id="cobar" aria-hidden="true"><li data-a="0.30" data-b="0.50"><b>1</b>3D-кольцо с вашими работами</li><li data-a="0.50" data-b="0.70"><b>2</b>Услуги — живая сцена</li><li data-a="0.70" data-b="0.95"><b>3</b>Расчёт и квиз с готовым сообщением</li></ol>
+  </div>
 </section>
 
-<section class="wrap alt">
-  <h2>Вопросы</h2>
-  <details><summary>Нужно ли уметь программировать?</summary><p>Нет. Нужно уверенно пользоваться ноутбуком и браузером.</p></details>
-  <details><summary>Сколько это стоит?</summary><p>Пилотная группа бесплатна. Следующие группы могут быть платными — о цене сообщим заранее, без обязательств.</p></details>
-  <details><summary>Что нужно установить?</summary><p>Ничего. Нужен браузер и бесплатный аккаунт в AI-сервисе — подскажем за день до встречи.</p></details>
-  <details><summary>Что будет с моими данными?</summary><p>Мы собираем только имя или ник, e-mail и выбранный трек — для организации встреч и обратной связи. Не передаём третьим лицам, удаляем по запросу и в любом случае после завершения пилота. [ЧЕРНОВИК — финальный текст и контакт утверждает основатель]</p></details>
-  <details><summary>А если AI-сервис сломается?</summary><p>У нас есть запасной инструмент и готовые примеры, на которых можно продолжить работу.</p></details>
+<!-- WHAT YOU GET -->
+<section class="sec inv" id="get">
+  <div class="container">
+    <p class="eyebrow">Что вы получите</p>
+    <h2>Не «знания про AI», а готовая вещь</h2>
+    <div class="grid3">
+      <div class="gc rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Свою ссылку</h3><p>Сайт-визитка, который можно поставить в шапку профиля, в WhatsApp-статус и отправить клиенту.</p></div>
+      <div class="gc rv" style="--d:.06s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 12h14M5 17h9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Услуги и цены на виду</h3><p>Больше не отвечать двадцать раз на «сколько стоит?». Всё написано красиво и понятно.</p></div>
+      <div class="gc rv" style="--d:.12s"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 8h7M8.5 12h2m3 0h2M8.5 16h2m3 0h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Расчёт с готовым сообщением</h3><p>Клиент выбирает услуги — вам приходит запрос с итогом в WhatsApp, Telegram или письмом.</p></div>
+      <div class="gc rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 9a2.7 2.7 0 1 1 3.9 2.4c-.9.5-1.4 1-1.4 2M12 17.5v.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><h3>Квиз «что мне подходит»</h3><p>Человек отвечает на три вопроса и сам находит свою услугу — а вы получаете заявку.</p></div>
+      <div class="gc rv" style="--d:.06s"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Карточку для Stories</h3><p>Результат квиза в виде красивой картинки, которой хочется поделиться.</p></div>
+      <div class="gc rv" style="--d:.12s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Умение проверять</h3><p>Чек-лист из шести пунктов: цены, граничные случаи, контакты, телефон. Шаблон остаётся с вами — правите сами.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>Кто ведёт</h2>
-  <p>Леонид, основатель 58 Systems. 10 лет в IT, из них 5 лет — инженер-разработчик в крупном международном банке (название не указываю). Живу в Чехии. Здесь я проверяю, можно ли научить человека без кода делать собственный полезный инструмент — и проверять, что он считает честно. <small>[ЧЕРНОВИК: фото и ссылку на профиль добавит основатель]</small></p>
+<!-- WHO -->
+<section class="sec" id="who">
+  <div class="container who">
+    <div>
+      <p class="eyebrow">Кому подойдёт</p>
+      <h2>Если вы продаёте своё время или умение</h2>
+      <ul class="chips big"><li>Nail-мастера</li><li>Брови и ресницы</li><li>Визажисты</li><li>Стилисты</li><li>Фотографы</li><li>Репетиторы</li><li>Коучи и психологи</li><li>Переводчики</li><li>Консультанты</li><li>Тренеры</li></ul>
+    </div>
+    <div class="fit">
+      <div class="fit-i yes rv"><b>Подойдёт</b><p>Вы работаете один или с небольшой командой, у вас есть услуги с ценами, и вам нужна страница, на которую удобно отправить клиента.</p></div>
+      <div class="fit-i no rv" style="--d:.08s"><b>Пока не про это</b><p>Интернет-магазин с оплатой, личные кабинеты и база клиентов — это другой уровень; мы скажем честно, чем он отличается.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="wrap center" id="signup">
-  <h2>Хотите попробовать?</h2>
-  <p><a id="cta2" class="btn disabled" aria-disabled="true">Запись скоро откроется</a></p>
-  <form id="signup-form" class="form" hidden novalidate>
-    <label>Имя или ник<input name="name" required maxlength="80" autocomplete="given-name"></label>
-    <label>E-mail<input name="email" type="email" required maxlength="120" autocomplete="email"></label>
-    <label>Telegram или Instagram (по желанию, чтобы написать быстрее)<input name="contact" maxlength="80" placeholder="@username"></label>
-    <fieldset class="slots"><legend>Когда вам удобно? (можно несколько, поможет выбрать даты)</legend>
-      <label class="check"><input type="checkbox" name="slots" value="weekday-evening"> Будни, вечер</label>
-      <label class="check"><input type="checkbox" name="slots" value="weekend-day"> Выходные, день</label>
-      <label class="check"><input type="checkbox" name="slots" value="weekend-evening"> Выходные, вечер</label>
-    </fieldset>
-    <label>Какой трек интереснее?
-      <select name="track"><option value="A">A · Калькулятор цены</option><option value="B">B · Квиз</option><option value="C">C · Личный планер</option><option value="?">Пока не знаю</option></select></label>
-    <label>Для кого или для чего хотите сделать приложение? (одно предложение, по желанию)<input name="idea" maxlength="200"></label>
-    <label>Откуда узнали?
-      <select name="source"><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option>От знакомого</option><option>Другое</option></select></label>
-    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <label class="check"><input type="checkbox" name="consent" value="yes" required> Согласен(на), что имя и e-mail будут использованы только для организации пилота и обратной связи; удалю данные по запросу и после пилота.</label>
-    <button class="btn" type="submit">Отправить заявку</button>
-    <p id="form-msg" class="micro" role="status" aria-live="polite"></p>
-  </form>
+<!-- FORMAT -->
+<section class="sec" id="format">
+  <div class="container">
+    <p class="eyebrow">Формат</p>
+    <h2>Две встречи — одна ссылка на выходе</h2>
+    <div class="cards2">
+      <article class="card rv"><p class="big-n">90<small> мин</small></p><h3>Собираем и публикуем</h3><ul><li>Пишем «пять строк» о вашем деле</li><li>Собираем сайт из профессионального шаблона с AI</li><li>Проверяем тестами и публикуем ссылку</li></ul></article>
+      <article class="card rv" style="--d:.1s"><p class="big-n">60<small> мин</small></p><h3>Проверяем и показываем</h3><ul><li>Через несколько дней, когда вы показали ссылку другу</li><li>Ищем, что можно сломать, и чиним</li><li>Добавляем одну функцию и показываем результат</li></ul></article>
+    </div>
+    <p class="lv-intro rv">В группе бывают разные уровни — поэтому три «передачи». Вы сами выбираете скорость.</p>
+    <div class="levels">
+      <div class="lv rv"><b>Уровень 1</b><h3>Ссылка за вечер</h3><p>Профессиональный шаблон, ваш текст и цены, публикация. Для тех, кто делает это впервые.</p></div>
+      <div class="lv rv" style="--d:.08s"><b>Уровень 2</b><h3>+ Умный модуль</h3><p>Расчёт цены с готовым сообщением вам или квиз, который приводит заявки.</p></div>
+      <div class="lv rv" style="--d:.16s"><b>Уровень 3</b><h3>+ Своё</h3><p>Своя тема, свои фото и Telegram-бот, который принимает заявки (вместе с ведущим). Для тех, кто уже пробовал AI-инструменты.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLES -->
+<section class="sec inv" id="examples">
+  <div class="container">
+    <p class="eyebrow">Примеры</p>
+    <h2>Один шаблон — разные дела</h2>
+    <div class="proj">
+      <div class="proj-info">
+        <div class="seg" role="tablist" aria-label="Примеры" id="seg">
+          <i class="seg-pill" id="segPill"></i>
+          <button role="tab" id="tab0" aria-selected="true" aria-controls="pan0" data-i="0">Фотограф</button>
+          <button role="tab" id="tab1" aria-selected="false" aria-controls="pan1" data-i="1" tabindex="-1">Стилист</button>
+          <button role="tab" id="tab2" aria-selected="false" aria-controls="pan2" data-i="2" tabindex="-1">Репетитор</button>
+        </div>
+        <div class="panels">
+          <div class="panel on" role="tabpanel" id="pan0" aria-labelledby="tab0"><h3>Анна Новак — фотограф</h3><p>3D-кольцо работ, пакеты съёмок, расчёт стоимости и квиз «какая съёмка вам подходит». Тёмная тема.</p><ul><li>Закреплённая сцена «Услуги и цены»</li><li>Готовое сообщение в WhatsApp</li><li>Карточка результата для Stories</li></ul><a class="link" href="apps/examples/photo.html">Открыть на весь экран →</a></div>
+          <div class="panel" role="tabpanel" id="pan1" aria-labelledby="tab1" hidden><h3>Мира Лайн — стилист</h3><p>Капсульный гардероб, консультации и шопинг-сопровождение. Светлая тёплая тема.</p><ul><li>Три формата работы с ценами</li><li>Шаги «как это происходит»</li><li>Квиз «с чего начать»</li></ul><a class="link" href="apps/examples/stylist.html">Открыть на весь экран →</a></div>
+          <div class="panel" role="tabpanel" id="pan2" aria-labelledby="tab2" hidden><h3>Олег Март — репетитор</h3><p>Пробное занятие, индивидуальные уроки и мини-группы. Строгая светлая тема.</p><ul><li>Расчёт занятий и разбор домашки</li><li>Квиз «какой формат подойдёт»</li><li>Контакты в WhatsApp, Telegram и почте</li></ul><a class="link" href="apps/examples/tutor.html">Открыть на весь экран →</a></div>
+        </div>
+        <p class="micro">Это примеры с вымышленными людьми и данными. Ваш сайт будет про вас.</p>
+      </div>
+      <div class="proj-stage">
+        <div class="frame"><i class="ph-island"></i>
+          <iframe class="pf on" data-src="apps/examples/photo.html?v=10" title="Пример: фотограф" loading="lazy"></iframe>
+          <iframe class="pf" data-src="apps/examples/stylist.html?v=10" title="Пример: стилист" loading="lazy"></iframe>
+          <iframe class="pf" data-src="apps/examples/tutor.html?v=10" title="Пример: репетитор" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="container about">
+    <div class="portrait rv"><img src="img/leonid.jpg" alt="Леонид" onerror="this.remove()"><span>Л</span></div>
+    <div class="rv" style="--d:.1s">
+      <p class="eyebrow">Ведущий</p>
+      <h2>Красиво — и надёжно</h2>
+      <p>Я Леонид, основатель 58 Systems. Живу в Чехии, строю системы автоматизации для бизнеса. Красивую страницу сделать несложно; я научу вас делать её так, чтобы она ещё и считала правильно, не выдавала лишних данных и не ломалась от первого странного ввода.</p>
+      <ul class="chips"><li>10 лет в IT</li><li>5 лет разработки в крупном международном банке</li><li>Прага</li></ul>
+      <!-- ЧЕРНОВИК для основателя: положите фото в img/leonid.jpg (квадрат или 4:5), оно заменит букву; подтвердите формулировку о банке. -->
+    </div>
+  </div>
+</section>
+
+<!-- PILOT RULES -->
+<section class="sec" id="rules">
+  <div class="container">
+    <p class="eyebrow">Правила игры</p>
+    <h2>Честно о пилоте</h2>
+    <div class="grid4">
+      <div class="rule rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M7 8c0-1.7 2-3 5-3s5 1.2 5 3-2 2.6-5 3-5 1.3-5 3.2 2 3 5 3 5-1.3 5-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Бесплатно</h3><p>Это первая тестовая группа. Взамен — ваши честные впечатления.</p></div>
+      <div class="rule rv" style="--d:.06s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 5l14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Без записи</h3><p>Встречи не записываем. Ваши работы показываем публично только с вашего согласия.</p></div>
+      <div class="rule rv" style="--d:.12s"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><h3>Проверка перед запуском</h3><p>Цены и контакты на сайте — ваша ответственность; мы учим их проверять. Это не бухгалтерский и не юридический расчёт.</p></div>
+      <div class="rule rv" style="--d:.18s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 13h6l-1 8 8-10h-6l1-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><h3>Лимиты сервисов</h3><p>Бесплатные AI-сервисы ограничены. Мы заранее проверяем путь и держим запасной вариант.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="container narrow">
+    <p class="eyebrow">Вопросы</p>
+    <h2>Что обычно спрашивают</h2>
+    <div class="acc" id="acc">
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a1" id="q1">Я не технарь. У меня получится?<i></i></button><div class="acc-p" id="a1" role="region" aria-labelledby="q1"><div><p>Да. Вам нужно уверенно пользоваться ноутбуком и браузером. Мы начинаем с готового шаблона: вы меняете свои тексты и цены, а AI помогает с остальным. Программировать не нужно.</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a2" id="q2">В чём подвох — почему бесплатно?<i></i></button><div class="acc-p" id="a2" role="region" aria-labelledby="q2"><div><p>Это первая тестовая группа. Мне нужны честные впечатления и понимание, где люди застревают. Подвоха нет: ничего покупать не нужно. Публично показывать вашу работу я буду только с вашего отдельного согласия. Следующие группы могут быть платными — цену сообщим заранее.</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a3" id="q3">Сколько времени уйдёт на подготовку?<i></i></button><div class="acc-p" id="a3" role="region" aria-labelledby="q3"><div><p>Около 15 минут до встречи: список услуг с ценами, ваши контакты и (по желанию) несколько фото. За сутки пришлю короткую инструкцию.</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a4" id="q4">Нужно ли что-то устанавливать или платить за AI?<i></i></button><div class="acc-p" id="a4" role="region" aria-labelledby="q4"><div><p>Устанавливать ничего не нужно, достаточно браузера. Мы используем бесплатные тарифы AI-сервисов; их лимиты я проверяю заранее и держу запасной вариант. Если для чего-то понадобится платный тариф, я скажу об этом до встречи.</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a5" id="q5">А если у меня нет бизнеса?<i></i></button><div class="acc-p" id="a5" role="region" aria-labelledby="q5"><div><p>Можно сделать личный сайт или портфолио — тот же шаблон, те же приёмы. Но лучше всего подходит тем, кто продаёт услуги.</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a6" id="q6">Что будет с моими данными?<i></i></button><div class="acc-p" id="a6" role="region" aria-labelledby="q6"><div><p>Мы собираем только имя или ник, e-mail, по желанию Telegram/Instagram и удобное время — для организации встреч и обратной связи. Не передаём третьим лицам, удаляем по запросу и в любом случае после завершения пилота.<!-- ЧЕРНОВИК: финальный текст политики и контакт утверждает основатель --></p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a7" id="q7">А если AI-сервис сломается или кончатся лимиты?<i></i></button><div class="acc-p" id="a7" role="region" aria-labelledby="q7"><div><p>У нас есть запасной инструмент и готовые примеры. В худшем случае вы продолжите на готовом шаблоне — я честно назову это «настройкой шаблона», а не «сделал всё с нуля».</p></div></div></div>
+      <div class="acc-i"><button aria-expanded="false" aria-controls="a8" id="q8">Это правда можно использовать в работе?<i></i></button><div class="acc-p" id="a8" role="region" aria-labelledby="q8"><div><p>Да, как сайт-визитку и страницу с ценами — после того как вы сами проверите тексты, цены и контакты по нашему чек-листу. Мы не обещаем клиентов или доход: сайт — инструмент, а не гарантия продаж.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section class="finale" id="finale">
+  <canvas class="gl" id="glFin" aria-hidden="true"></canvas>
+  <div class="hero-veil fin-veil" aria-hidden="true"></div>
+  <div class="container fin-in">
+    <p class="eyebrow">Бесплатный пилот · 6–8 мест</p>
+    <h2 class="mega">Один вечер — и своя ссылка</h2>
+    <a class="btn primary big" href="#signup">Встать в список ожидания →</a>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="sec signup" id="signup">
+  <div class="container narrow">
+    <p class="eyebrow">Запись</p>
+    <h2>Хотите свою ссылку?</h2>
+    <p class="sub">Оставьте контакты — когда определим даты, я напишу вам.</p>
+    <div class="formcard">
+      <p class="closed" id="closedMsg"><a class="btn primary" data-cta aria-disabled="true">Запись скоро откроется</a></p>
+      <form id="signup-form" hidden novalidate>
+        <div class="f2">
+          <label>Имя или ник<input name="name" required maxlength="80" autocomplete="given-name" enterkeyhint="next"></label>
+          <label>E-mail<input name="email" type="email" required maxlength="120" autocomplete="email" inputmode="email" enterkeyhint="next"></label>
+        </div>
+        <label>Telegram или Instagram <small>(по желанию)</small><input name="contact" maxlength="80" placeholder="@username" autocapitalize="none" autocomplete="off"></label>
+        <fieldset class="slots"><legend>Когда вам удобно? <small>(можно несколько)</small></legend>
+          <label class="chip"><input type="checkbox" name="slots" value="weekday-evening"><span>Будни, вечер</span></label>
+          <label class="chip"><input type="checkbox" name="slots" value="weekend-day"><span>Выходные, день</span></label>
+          <label class="chip"><input type="checkbox" name="slots" value="weekend-evening"><span>Выходные, вечер</span></label>
+        </fieldset>
+        <label>Ваш опыт с AI и сайтами<select name="level"><option value="1">Раньше ничего подобного не делал(а)</option><option value="2">Пробовал(а) ChatGPT и подобное, сайты не делал(а)</option><option value="3">Уже делал(а) сайты или приложения с AI</option></select></label>
+        <div class="f2">
+          <label>Что хотите сделать?<select name="track"><option value="site">Сайт-визитку</option><option value="price">Расчёт цены для клиентов</option><option value="quiz">Квиз-подбор</option><option value="?">Пока не знаю</option></select></label>
+          <label>Откуда узнали?<select name="source"><option>Instagram</option><option>TikTok</option><option>LinkedIn</option><option>От знакомого</option><option>Другое</option></select></label>
+        </div>
+        <label>Для кого или для чего хотите сделать сайт? <small>(одно предложение, по желанию)</small><input name="idea" maxlength="200"></label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="consent"><input type="checkbox" name="consent" value="yes" required><span>Согласен(на), что имя и e-mail будут использованы только для организации пилота и обратной связи. Удалю данные по запросу и после пилота.</span></label>
+        <button class="btn primary wide" type="submit" id="send">Отправить заявку</button>
+        <p id="form-msg" class="msg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="done" id="done" hidden><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 27l8 8 14-16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Заявка отправлена</h3><p>Проверьте почту (и папку «Спам») — я напишу, когда определим даты.</p></div>
+    </div>
+    <p id="dates" class="micro center">Даты будут объявлены после открытия записи.</p>
+  </div>
 </section>
 </main>
-<footer class="wrap foot"><span>58 Systems Workshops · пилот компании 58 Systems s.r.o., IČO 24511820, Chudenická 1059/30, 102 00 Praha 10 <small>(данные из публичного реестра ARES; проверить перед публикацией)</small></span><span id="contact"></span></footer>
+
+<footer class="foot"><div class="container"><span>58 Systems Workshops · пилот компании 58 Systems s.r.o., IČO 24511820, Chudenická 1059/30, 102 00 Praha 10</span><span id="contact"></span></div></footer>
 </body>
 </html>

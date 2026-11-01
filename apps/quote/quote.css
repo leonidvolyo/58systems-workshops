@@ -1,0 +1,10 @@
+.pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.pkg{margin:0;cursor:pointer;min-width:0}.pkg input{position:absolute;opacity:0;width:1px;height:1px;min-height:0}
+.pkg span{display:block;text-align:center;padding:11px 4px;border:1px solid var(--line);background:var(--s2);border-radius:12px;font-weight:600;font-size:14px;transition:border-color .2s,background .2s,color .2s}
+.pkg small{display:block;font-weight:500;color:var(--mute);font-size:12px}
+.pkg input:checked+span{border-color:var(--acc);background:#1b2008;color:var(--acc)}.pkg input:checked+span small{color:#b9d64a}
+.pkg input:focus-visible+span{outline:2px solid var(--acc);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.tag.l{margin:18px 0 0}.btns{display:flex;gap:8px;flex-wrap:wrap}.note.l{margin-top:10px}
+@media(max-width:340px){.pkgs{grid-template-columns:1fr}.two{grid-template-columns:1fr}.card{padding:14px}}
+@media print{body{background:#fff;color:#000}form,.btns,.note,h1+p,.tag:not(.l){display:none}.result{background:#fff;border:0}.row,.row b,.big,.tag.l,p{color:#000}.row{border-color:#ccc}}
